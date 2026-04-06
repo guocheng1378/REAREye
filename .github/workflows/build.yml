@@ -41,9 +41,11 @@ jobs:
         run: |
           # Accept licenses first
           yes | sdkmanager --licenses 2>/dev/null || true
+          # Remove release signing from debug build type (use default debug keystore)
+          sed -i '/getByName("debug")/,/}/s/signingConfig = signingConfigs.getByName("release")//' app/build.gradle.kts || true
+          sed -i '/getByName("debug")/,/}/s/signingConfig = signingConfigs.getByName("debug")//' app/build.gradle.kts || true
           # Try building; on first run Gradle auto-installs android-37.0
           ./gradlew assembleDebug -PbuildSuffix=canary || {
-            # If failed due to android-37 missing, create symlink and retry
             echo "=== Retry: fixing SDK path ==="
             ls -la "$ANDROID_HOME/platforms/" 2>/dev/null || true
             if [ -d "$ANDROID_HOME/platforms/android-37.0" ] && [ ! -d "$ANDROID_HOME/platforms/android-37" ]; then

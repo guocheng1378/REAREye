@@ -247,4 +247,27 @@ Widget: %2$s · Priority: %3$d</string>
     <string name="home_easter_egg_easter">Easter</string>
     <string name="home_easter_egg_easter_working">Module is being revived</string>
     <string name="home_easter_egg_easter_activated">The module is dead</string>
+
+    <!-- Template Market -->
+    <string name="template_market">Template Market</string>
+    <string name="template_market_desc">Browse and import built-in rear screen widget templates with one tap</string>
+
+    <!-- Notification Mirror -->
+    <string name="notification_mirror_category">New Components</string>
+    <string name="notification_mirror_category_desc">Notification mirror, system status, and music visualizer features</string>
+    <string name="enable_notification_mirror">Notification Mirror</string>
+    <string name="enable_notification_mirror_desc">Mirror main screen notifications to the rear screen in real-time</string>
+
+    <!-- System Status -->
+    <string name="enable_system_status_hook">System Status Widget</string>
+    <string name="enable_system_status_hook_desc">Provide real-time battery, RAM, and storage data for rear screen widgets</string>
+
+    <!-- Music Visualizer -->
+    <string name="enable_music_visualizer">Music Visualizer</string>
+    <string name="enable_music_visualizer_desc">Capture audio data and display frequency visualization on rear screen</string>
+    <string name="music_visualizer_bands">Visualizer Bands</string>
+    <string name="music_visualizer_bands_desc">Number of frequency bands for the visualizer</string>
+    <string name="bands_8">8 Bands</string>
+    <string name="bands_16">16 Bands</string>
+    <string name="bands_32">32 Bands</string>
 </resources>

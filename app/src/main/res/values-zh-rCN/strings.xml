@@ -246,4 +246,27 @@
     <string name="home_easter_egg_easter">复活节</string>
     <string name="home_easter_egg_easter_working">模块复活中</string>
     <string name="home_easter_egg_easter_activated">模块已死亡</string>
+
+    <!-- Template Market -->
+    <string name="template_market">模板市场</string>
+    <string name="template_market_desc">浏览并一键导入内置的副屏组件模板</string>
+
+    <!-- Notification Mirror -->
+    <string name="notification_mirror_category">新功能组件</string>
+    <string name="notification_mirror_category_desc">通知镜像、系统状态与音乐可视化功能</string>
+    <string name="enable_notification_mirror">通知镜像</string>
+    <string name="enable_notification_mirror_desc">将主屏通知实时镜像到副屏显示</string>
+
+    <!-- System Status -->
+    <string name="enable_system_status_hook">系统状态组件</string>
+    <string name="enable_system_status_hook_desc">为副屏组件提供实时电量、内存和存储数据</string>
+
+    <!-- Music Visualizer -->
+    <string name="enable_music_visualizer">音乐可视化</string>
+    <string name="enable_music_visualizer_desc">捕获音频数据并在副屏显示频谱可视化</string>
+    <string name="music_visualizer_bands">可视化频段数</string>
+    <string name="music_visualizer_bands_desc">频谱可视化的频段数量</string>
+    <string name="bands_8">8 频段</string>
+    <string name="bands_16">16 频段</string>
+    <string name="bands_32">32 频段</string>
 </resources>

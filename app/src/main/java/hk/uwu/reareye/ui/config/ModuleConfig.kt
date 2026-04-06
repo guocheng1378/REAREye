@@ -63,6 +63,24 @@ object ConfigKeys {
     const val HOOK_DISABLE_REAR_SCREEN_COVER = "enable_hook_rear_screen_cover"
 
     const val MORE_DEBUG = "enable_more_debug_logging"
+
+    // Notification Mirror
+    const val HOOK_NOTIFICATION_MIRROR_ENABLED = "enable_notification_mirror"
+    const val NOTIFICATION_MIRROR_APPS = "notification_mirror_apps"
+    const val NOTIFICATION_MIRROR_BLOCK_APPS = "notification_mirror_block_apps"
+    const val NOTIFICATION_MIRROR_SHOW_TEXT = "notification_mirror_show_text"
+    const val NOTIFICATION_MIRROR_SHOW_TIME = "notification_mirror_show_time"
+    const val NOTIFICATION_MIRROR_ALLOWLIST_MODE = "notification_mirror_allowlist_mode"
+
+    // System Status
+    const val HOOK_SYSTEM_STATUS_ENABLED = "enable_system_status"
+
+    // Music Visualizer
+    const val HOOK_MUSIC_VISUALIZER_ENABLED = "enable_music_visualizer"
+    const val MUSIC_VISUALIZER_BANDS = "music_visualizer_bands"
+
+    // Template Market
+    const val CFG_TEMPLATE_MARKET = "cfg_template_market"
 }
 
 enum class ModuleNavigationBarMode(
@@ -266,6 +284,49 @@ val REAREyeConfig = listOf(
                         titleRes = R.string.allow_rear_focus_notices,
                         descriptionRes = R.string.allow_rear_focus_notices_desc,
                         type = ConfigType.BooleanVal(defaultValue = false),
+                    ),
+                    ConfigItem(
+                        key = ConfigKeys.CFG_TEMPLATE_MARKET,
+                        titleRes = R.string.template_market,
+                        descriptionRes = R.string.template_market_desc,
+                        type = ConfigType.Manager(ConfigType.ManagerType.TEMPLATE_MARKET),
+                    ),
+                ),
+            ),
+            ConfigCategory(
+                titleRes = R.string.notification_mirror_category,
+                descriptionRes = R.string.notification_mirror_category_desc,
+                children = listOf(
+                    ConfigItem(
+                        key = ConfigKeys.HOOK_NOTIFICATION_MIRROR_ENABLED,
+                        titleRes = R.string.enable_notification_mirror,
+                        descriptionRes = R.string.enable_notification_mirror_desc,
+                        type = ConfigType.BooleanVal(defaultValue = false),
+                    ),
+                    ConfigItem(
+                        key = ConfigKeys.HOOK_SYSTEM_STATUS_ENABLED,
+                        titleRes = R.string.enable_system_status_hook,
+                        descriptionRes = R.string.enable_system_status_hook_desc,
+                        type = ConfigType.BooleanVal(defaultValue = true),
+                    ),
+                    ConfigItem(
+                        key = ConfigKeys.HOOK_MUSIC_VISUALIZER_ENABLED,
+                        titleRes = R.string.enable_music_visualizer,
+                        descriptionRes = R.string.enable_music_visualizer_desc,
+                        type = ConfigType.BooleanVal(defaultValue = false),
+                    ),
+                    ConfigItem(
+                        key = ConfigKeys.MUSIC_VISUALIZER_BANDS,
+                        titleRes = R.string.music_visualizer_bands,
+                        descriptionRes = R.string.music_visualizer_bands_desc,
+                        type = ConfigType.EnumSingleSelect(
+                            defaultValue = 16,
+                            options = listOf(
+                                ConfigType.EnumOption(titleRes = R.string.bands_8, value = 8),
+                                ConfigType.EnumOption(titleRes = R.string.bands_16, value = 16),
+                                ConfigType.EnumOption(titleRes = R.string.bands_32, value = 32),
+                            ),
+                        ),
                     ),
                 ),
             ),

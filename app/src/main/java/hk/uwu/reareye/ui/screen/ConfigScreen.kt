@@ -37,7 +37,9 @@ import hk.uwu.reareye.ui.components.config.BusinessExtraConfigManagerScreen
 import hk.uwu.reareye.ui.components.config.BusinessManagerScreen
 import hk.uwu.reareye.ui.components.config.CardManagerScreen
 import hk.uwu.reareye.ui.components.config.ConfigNodeRow
+import hk.uwu.reareye.ui.components.config.NotificationMirrorConfigScreen
 import hk.uwu.reareye.ui.components.config.RearWallpaperManagerScreen
+import hk.uwu.reareye.ui.components.config.TemplateMarketScreen
 import hk.uwu.reareye.ui.config.ConfigCategory
 import hk.uwu.reareye.ui.config.ConfigGroup
 import hk.uwu.reareye.ui.config.ConfigItem
@@ -71,6 +73,8 @@ private sealed interface ConfigRoute {
     data object BusinessManager : ConfigRoute
     data object CardManager : ConfigRoute
     data object BusinessExtraManager : ConfigRoute
+    data object TemplateMarket : ConfigRoute
+    data object NotificationMirrorConfig : ConfigRoute
 }
 
 private const val NAV_BAR_EXIT_DURATION_MS = 220L
@@ -86,7 +90,9 @@ private fun ConfigRoute.isOverlayRoute(): Boolean {
             this is ConfigRoute.RearWallpaperManager ||
             this is ConfigRoute.BusinessManager ||
             this is ConfigRoute.CardManager ||
-            this is ConfigRoute.BusinessExtraManager
+            this is ConfigRoute.BusinessExtraManager ||
+            this is ConfigRoute.TemplateMarket ||
+            this is ConfigRoute.NotificationMirrorConfig
 }
 
 @Composable
@@ -265,6 +271,14 @@ fun ConfigScreen(
                                 openOverlayRoute(ConfigRoute.BusinessExtraManager)
                             }
 
+                            ConfigType.ManagerType.TEMPLATE_MARKET -> {
+                                openOverlayRoute(ConfigRoute.TemplateMarket)
+                            }
+
+                            ConfigType.ManagerType.NOTIFICATION_MIRROR -> {
+                                openOverlayRoute(ConfigRoute.NotificationMirrorConfig)
+                            }
+
                             null -> Unit
                         }
                     },
@@ -304,6 +318,14 @@ fun ConfigScreen(
                                 openOverlayRoute(ConfigRoute.BusinessExtraManager)
                             }
 
+                            ConfigType.ManagerType.TEMPLATE_MARKET -> {
+                                openOverlayRoute(ConfigRoute.TemplateMarket)
+                            }
+
+                            ConfigType.ManagerType.NOTIFICATION_MIRROR -> {
+                                openOverlayRoute(ConfigRoute.NotificationMirrorConfig)
+                            }
+
                             null -> Unit
                         }
                     },
@@ -335,6 +357,17 @@ fun ConfigScreen(
                 ConfigRoute.BusinessExtraManager -> BusinessExtraConfigManagerScreen(
                     prefsManager = prefsManager,
                     onBack = { closeOverlayRoute() },
+                )
+
+                ConfigRoute.TemplateMarket -> TemplateMarketScreen(
+                    prefsManager = prefsManager,
+                    onBack = { closeOverlayRoute() },
+                )
+
+                ConfigRoute.NotificationMirrorConfig -> NotificationMirrorConfigScreen(
+                    prefsManager = prefsManager,
+                    onBack = { closeOverlayRoute() },
+                    onOpenAppList = { /* Navigate to app list filter */ },
                 )
             }
         }

@@ -173,6 +173,8 @@ sealed class ConfigType {
         BUSINESS,
         CARD,
         BUSINESS_EXTRA,
+        TEMPLATE_MARKET,
+        NOTIFICATION_MIRROR,
     }
 
     data class Manager(val managerType: ManagerType) : ConfigType() {

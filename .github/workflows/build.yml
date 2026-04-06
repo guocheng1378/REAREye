@@ -2,7 +2,7 @@ name: Build and Release
 
 on:
   push:
-    branches: [ "master", "main", "dev" ]
+    branches: [ "master", "main", "dev", "feature/**" ]
   workflow_dispatch:
 
 jobs:

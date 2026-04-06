@@ -70,7 +70,7 @@ class SystemStatusHook : YukiBaseHooker() {
             onAppLifecycle {
                 onCreate {
                     hostContext = appContext
-                    mainHandler = Handler(appContext!!.mainLooper)
+                    mainHandler = appContext?.let { Handler(it.mainLooper) }
 
                     if (hookInitialized.compareAndSet(false, true)) {
                         // Initial update
@@ -78,9 +78,10 @@ class SystemStatusHook : YukiBaseHooker() {
                         scheduleNextUpdate()
 
                         // Listen for battery changes (more responsive than polling)
+                        val ctx = appContext ?: return@onCreate
                         val batteryFilter = IntentFilter(Intent.ACTION_BATTERY_CHANGED)
                         ContextCompat.registerReceiver(
-                            appContext,
+                            ctx,
                             object : BroadcastReceiver() {
                                 override fun onReceive(context: Context?, intent: Intent?) {
                                     if (intent?.action == Intent.ACTION_BATTERY_CHANGED) {

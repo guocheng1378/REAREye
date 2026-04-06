@@ -25,6 +25,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import hk.uwu.reareye.ui.components.card.SuperCard
 import hk.uwu.reareye.ui.config.ConfigKeys
 import hk.uwu.reareye.ui.config.PrefsManager
 import hk.uwu.reareye.ui.config.PrefsManager.Companion.getPrefsManager

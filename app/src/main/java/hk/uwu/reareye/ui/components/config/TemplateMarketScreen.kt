@@ -4,6 +4,8 @@ import android.annotation.SuppressLint
 import android.widget.Toast
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.spring
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -67,8 +69,6 @@ import top.yukonga.miuix.kmp.basic.BasicComponentDefaults
 import top.yukonga.miuix.kmp.basic.Button
 import top.yukonga.miuix.kmp.basic.ButtonDefaults
 import top.yukonga.miuix.kmp.basic.Card
-import top.yukonga.miuix.kmp.basic.CardDefaults
-import top.yukonga.miuix.kmp.basic.Chip
 import top.yukonga.miuix.kmp.basic.Icon
 import top.yukonga.miuix.kmp.basic.IconButton
 import top.yukonga.miuix.kmp.basic.MiuixScrollBehavior
@@ -261,10 +261,17 @@ fun TemplateMarketScreen(
                     ) {
                         categories.forEach { category ->
                             val selected = category == selectedCategory
-                            Chip(
+                            val bgColor = if (selected) Color(0xFF5B8DEF) else Color(0xFF2A2A2A)
+                            val textColor = if (selected) Color.White else Color(0xFFAAAAAA)
+                            Text(
                                 text = category,
-                                selected = selected,
-                                onClick = { selectedCategory = category },
+                                fontSize = 13.sp,
+                                color = textColor,
+                                modifier = Modifier
+                                    .clip(RoundedCornerShape(16.dp))
+                                    .background(bgColor)
+                                    .clickable { selectedCategory = category }
+                                    .padding(horizontal = 14.dp, vertical = 7.dp),
                             )
                         }
                     }
@@ -415,7 +422,7 @@ private fun TemplateCard(
                     Button(
                         onClick = onImport,
                         colors = ButtonDefaults.buttonColorsPrimary(),
-                        contentPadding = PaddingValues(horizontal = 14.dp, vertical = 6.dp),
+                        modifier = Modifier.padding(horizontal = 2.dp),
                     ) {
                         Icon(
                             imageVector = Icons.Filled.Download,

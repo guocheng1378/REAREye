@@ -37,21 +37,24 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
-      - name: Install Android SDK 37 & fix path
-        run: |
-          # Accept all licenses first
-          yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --licenses 2>/dev/null || true
-          # Install platform 37
-          $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager "platforms;android-37" 2>/dev/null || true
-          # Create symlink if needed: android-37.0 -> android-37
-          if [ -d "$ANDROID_HOME/platforms/android-37.0" ] && [ ! -d "$ANDROID_HOME/platforms/android-37" ]; then
-            ln -s "$ANDROID_HOME/platforms/android-37.0" "$ANDROID_HOME/platforms/android-37"
-          fi
-          echo "=== SDK platforms ==="
-          ls -la "$ANDROID_HOME/platforms/"
-
       - name: Build Debug APK
-        run: ./gradlew assembleDebug -PbuildSuffix=canary
+        run: |
+          # Accept licenses first
+          yes | sdkmanager --licenses 2>/dev/null || true
+          # Try building; on first run Gradle auto-installs android-37.0
+          ./gradlew assembleDebug -PbuildSuffix=canary || {
+            # If failed due to android-37 missing, create symlink and retry
+            echo "=== Retry: fixing SDK path ==="
+            ls -la "$ANDROID_HOME/platforms/" 2>/dev/null || true
+            if [ -d "$ANDROID_HOME/platforms/android-37.0" ] && [ ! -d "$ANDROID_HOME/platforms/android-37" ]; then
+              ln -s "$ANDROID_HOME/platforms/android-37.0" "$ANDROID_HOME/platforms/android-37"
+              echo "Symlink created, retrying build..."
+              ./gradlew assembleDebug -PbuildSuffix=canary
+            else
+              echo "ERROR: android-37.0 not found"
+              exit 1
+            fi
+          }
 
       - name: Build and Sign Release APK
         run: ./gradlew assembleRelease -PbuildSuffix=canary
